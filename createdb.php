@@ -72,8 +72,8 @@
 				 <tr>
 				 	<td><?php echo $i;?></td>
 				 	<td><?php echo $rows['Database']; ?></td>
-				 	<td><a href="dropdb.php?dbname=<?php echo $rows['Database']; ?>" class="btn btn-danger" onclick="confirm('Do you want to delete this database?');">Drop</a></td>
-				 	<td><a href="" class="btn btn-primary">Show Tables</a></td>
+				 	<td><a href="dropdb.php?dbname=<?php echo $rows['Database']; ?>" class="btn btn-danger" onclick="return confirm('Do you want to delete this database?');">Drop</a></td>
+				 	<td><a href="showtables.php?dbname=<?php echo $rows['Database'];?>" class="btn btn-primary">Show Tables</a></td>
 				 </tr>
 				<?php
 			}
