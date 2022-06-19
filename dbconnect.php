@@ -2,9 +2,10 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+$db 	  = 'news_portal';
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password);
+$conn = mysqli_connect($servername, $username, $password,$db);
 
 // Check connection
 if (!$conn) {

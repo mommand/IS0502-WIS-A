@@ -16,7 +16,7 @@ if ($exe_q){
 	?>
 	<div class="container">
 		<div class="row">
-			<h3 style="padding: 30px;">
+			<h3>
 				<?php echo $dbname; ?>
 			</h3>
 			 <hr>
