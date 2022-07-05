@@ -48,6 +48,10 @@
       	background-image: url('http://localhost:8888/IS0502-wis-a/news/<?php echo $rows['foto']; ?>') !important;
       	
       }
+      .img1{
+        width: 100%; 
+        height: 85%;
+      }
   	</style>
   <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark bg">
     <div class="col-md-6 px-0">
@@ -65,38 +69,67 @@
       <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
     </div>
   </div>
+   <h4>Featured News</h4>
+<hr>
 
   <div class="row mb-2">
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">World</strong>
-          <h3 class="mb-0">Featured post</h3>
-          <div class="mb-1 text-muted">Nov 12</div>
-          <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="stretched-link">Continue reading</a>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+    <?php
+      $two_news = "SELECT * from news ORDER by id desc LIMIT 2 OFFSET 1 ";
+      $run_query = mysqli_query($conn, $two_news);
+      while ($records = $run_query->fetch_assoc()) {
+       
+       ?>
+      
+      <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <!-- col 1--->
+          <div class="col-md-7">
+                   <div class="row">
+                <div class="col p-4 d-flex flex-column position-static">
+                  <strong class="d-inline-block mb-2 text-primary">
+                    <?php 
+                     $cat_id = $records['cat_id'];
+                     $category = "SELECT * FROM category WHERE id = $cat_id";
+                     $e_query = mysqli_query($conn, $category);
+                     $get_cat = $e_query->fetch_assoc();
 
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-success">Design</strong>
-          <h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-muted">Nov 11</div>
-          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="stretched-link">Continue reading</a>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                     echo $get_cat['Name'];
 
-        </div>
+                     ?>
+                  </strong>
+                  <h3 class="mb-0"><?php echo $records['title']; ?></h3>
+                  <div class="mb-1 text-muted">
+                    <?php 
+                    echo $records['publish_date'];
+                    
+                     ?>
+                  </div>
+                  <p class="card-text mb-auto">
+                    <?php
+                      $content1 = $records['content'];
+                      $headline1 = substr($content1, 0, 70);
+                      echo $headline1;
+                    ?>
+                  </p>
+                  <a href="#" class="stretched-link">Continue reading</a>
+                </div>
+
+              </div>
+          </div>
+           <!-- end of col 1 -->
+           <!-- col2 -->
+            <div class="col-md-5">
+               <img src="http://localhost:8888/IS0502-wis-a/news/<?php echo $records['foto']; ?>" class="img1">
+            </div>
+           <!-- end of col 2 -->
       </div>
-    </div>
+      </div>
+
+    <?php
+    }
+
+    ?>
+   
   </div>
 </div>
 
